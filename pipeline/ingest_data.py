@@ -1,0 +1,85 @@
+import pandas as pd
+from sqlalchemy import create_engine
+from tqdm.auto import tqdm
+
+# Specify Data types
+dtype = {
+    "VendorID": "Int64",
+    "passenger_count": "Int64",
+    "trip_distance": "float64",
+    "RatecodeID": "Int64",
+    "store_and_fwd_flag": "string",
+    "PULocationID": "Int64",
+    "DOLocationID": "Int64",
+    "payment_type": "Int64",
+    "fare_amount": "float64",
+    "extra": "float64",
+    "mta_tax": "float64",
+    "tip_amount": "float64",
+    "tolls_amount": "float64",
+    "improvement_surcharge": "float64",
+    "total_amount": "float64",
+    "congestion_surcharge": "float64"
+}
+
+parse_dates = [
+    "tpep_pickup_datetime",
+    "tpep_dropoff_datetime"
+]
+
+
+
+# Ingest Data into Progres
+def run():  
+    # Parameters 
+    year = 2021
+    month = 1
+    pg_user = 'root'
+    pg_pass = 'root'
+    pg_host = 'localhost'
+    pg_port = 5432
+    pg_db = 'ny_taxi'
+    chunksize=100000  
+    target_table = "yellow_taxi_data"
+    prefix = 'https://github.com/DataTalksClub/nyc-tlc-data/releases/download/yellow/'
+    url = f'{prefix}yellow_tripdata_{year}-{month:02d}.csv.gz'
+
+    # Create database connection
+    engine = create_engine(f'postgresql://{pg_user}:{pg_pass}@{pg_host}:{pg_port}/{pg_db}')
+    
+    # Create an iterator to read each chunk from the url 
+    df_iter = pd.read_csv(
+        url,
+        dtype=dtype,
+        parse_dates=parse_dates,
+        iterator=True,
+        chunksize=chunksize
+    )
+
+    # Iterate over chunks
+    first = True
+    for df_chunk in tqdm(df_iter):
+        # Create table schema (no data)
+        if first:
+            df_chunk.head(0).to_sql(
+                name=target_table,
+                con=engine,
+                if_exists='replace'
+            )
+            first=False # once it's already run as first, change status first to False to continue to next chunk
+            print('Table created')
+        
+        # Continue to next chunk
+        df_chunk.to_sql(name=target_table, 
+                                    con=engine,
+                                    if_exists='append'
+                                    )
+        print(f'Inserted: {len(df_chunk)}')
+
+
+# Execute
+if __name__ == '__main__':
+    run()
+
+
+
