@@ -1,0 +1,44 @@
+# Create a named volume 'ny_taxi_postgres_data' inside Postgres container inside Docker's internal storage 
+# and set environment variables (use, pw, db name)
+docker run -it --rm \
+  -e POSTGRES_USER="root" \
+  -e POSTGRES_PASSWORD="root" \
+  -e POSTGRES_DB="ny_taxi" \
+  -v ny_taxi_postgres_data:/var/lib/postgresql \
+  -p 5432:5432 \
+  postgres:18
+
+ docker run -it \
+  -e PGADMIN_DEFAULT_EMAIL="admin@admin.com" \
+  -e PGADMIN_DEFAULT_PASSWORD="root" \
+  -v pgadmin_data:/var/lib/pgadmin \
+  -p 8085:80 \
+  dpage/pgadmin4
+
+# When running docker compose to run Postgres and pgAdmin together, we will need to find the name of the virtual network that Docker compose created for the containers
+# check the network link:
+docker network ls
+
+# it's pipeline_default (or similar based on directory name)
+# now run the script:
+docker run -it --rm\
+  --network=pipeline_default \
+  taxi_ingest:v001 \
+    --pg-user=root \
+    --pg-pass=root \
+    --pg-host=pgdatabase \
+    --pg-port=5432 \
+    --pg-db=ny_taxi \
+    --target-table=yellow_taxi_trips
+
+    docker run -it --rm \
+  --network=hw1_pipeline_default \
+  taxi_ingest:v001 \
+  zones.py --pg-host=pgdatabase
+
+# mount the folder data into container, so that any new files/adjustment within this data folder --> container sees the changes immediately without copying, rebuidling container
+docker run -it --rm \
+  --network=hw1_pipeline_default \
+  -v $(pwd)/data:/app/data \
+  taxi_ingest:v001 \
+  green_taxi_trips.py --pg-host=pgdatabase --parquet-file-path /app/data/green_tripdata_2025-11.parquet
