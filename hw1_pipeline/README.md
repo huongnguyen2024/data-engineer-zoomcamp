@@ -24,7 +24,7 @@ WITH daily_totals AS ( \
 	) \
 SELECT * \
 FROM daily_totals \
-WHERE total_distance = (SELECT MAX(total_distance) FROM daily_totals); \
+WHERE total_distance = (SELECT MAX(total_distance) FROM daily_totals); 
 
 #### Question 5 SQL query
 WITH zones_total AS( \
