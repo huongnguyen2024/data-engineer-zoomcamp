@@ -206,4 +206,11 @@ marimo/_static/
 marimo/_lsp/
 __marimo__/
 
+# ignore all data files
+data/*
+# but keep the folder itself
+!data/.gitkeep
+
 *.parquet
+# Ignore service account keys
+*-sa.json
