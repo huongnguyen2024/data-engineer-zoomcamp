@@ -1,3 +1,4 @@
+# IF WE ARE NOT USING DOCKER COMPOSE, HAVE TO DO THESE COMMANDS MANUALLY
 # Create a named volume 'ny_taxi_postgres_data' inside Postgres container inside Docker's internal storage 
 # and set environment variables (use, pw, db name)
 docker run -it --rm \
@@ -15,19 +16,24 @@ docker run -it --rm \
   -p 8085:80 \
   dpage/pgadmin4
 
+# CHECK NETWORK 
+# A Docker network is automatically created by Docker Compose when you run it the first time, unless you’ve explicitly specified an existing network.
 # When running docker compose to run Postgres and pgAdmin together, we will need to find the name of the virtual network that Docker compose created for the containers
-# check the network link:
 docker network ls
 
+## INSTEAD OF MANUALLY RUN EACH OF THE ABOVE COMMAND TO CREATE 2 CONTAINERS FOR POSTGRES AND PGADMIN,
+#WE USE DOCKER-COMPOSE.YAML. THE VOLUMES ARE REUSED, UNLESS VOLUME NAMES ARE CHANGED, OR VOLUMES ARE REMOVED 
 
-    docker run -it --rm \
-  --network=hw1_pipeline_default \
+# THEN TO INGEST DATA (ONLY ONCE AND DATA STAYS BECAUSE WE USE VOLUME TO SAVE THEM THERE; EVEN THE CONTAINERS ARE EXITED)
+# this command is to ingest the data from zones.py, no need to rerun this command because db is saved in the volume
+docker run -it --rm \
+  --network=01_homework_pipeline_default \
   taxi_ingest:v001 \
   zones.py --pg-host=pgdatabase
 
 # mount the folder data into container, so that any new files/adjustment within this data folder --> container sees the changes immediately without copying, rebuidling container
 docker run -it --rm \
-  --network=hw1_pipeline_default \
+  --network=01_homework_pipeline_default \
   -v $(pwd)/data:/app/data \
   taxi_ingest:v001 \
   green_taxi_trips.py --pg-host=pgdatabase --parquet-file-path /app/data/green_tripdata_2025-11.parquet
