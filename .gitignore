@@ -214,3 +214,5 @@ data/*
 *.parquet
 # Ignore service account keys
 *-sa.json
+.env
+.env_encoded
