@@ -63,5 +63,5 @@ ORDER BY g.tip_amount DESC \
 LIMIT 1;
 ```
 ## Note on Dataset 
-Parquet files are not committer.
+Parquet files are not committed.
 Download example data from: https://d37ci6vzurychx.cloudfront.net/trip-data/green_tripdata_2025-11.parquet
