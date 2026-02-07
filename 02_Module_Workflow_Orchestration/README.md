@@ -5,7 +5,7 @@ By adding this command for the extract task:
 ```bash 
 - ls -lh {{render(vars.file)}} 
 ```
-This Linux command list the extracted file which is yellow_tripdata_2020-12.csv after it has been unzipped. 
+This Linux command list the extracted file which is yellow_tripdata_2020-12.csv after it has been unzipped. \
 When the execution is done -> Logs -> extract -> -rw-r--r-- 1 root root 129M Feb  2 18:52 yellow_tripdata_2020-12.csv  
 
 #### Question 2 
