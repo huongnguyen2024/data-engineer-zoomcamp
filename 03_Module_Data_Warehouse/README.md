@@ -17,5 +17,5 @@
 This helps reduce cost when querying. Cost is upfront. One column. 
 2. Clustering:  more filtered table with grouping into clusters. Cost is unknown. Multiple columns. \
 • We should choose Clustering over Partitioning when:
-1. Partitioning results in very small amount of granualities, which might exceed the limits on partition tables (4000)
-2. Partitioning results in mutation operations too frequently e.g. inserting data into partition tables every few minutes.
+••• Partitioning results in very small amount of granualities, which might exceed the limits on partition tables (4000) \
+••• Partitioning results in mutation operations too frequently e.g. inserting data into partition tables every few minutes.
