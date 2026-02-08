@@ -16,6 +16,6 @@
 1. Partitioning: splitting the dataset into chunks where each chunk represent a specific group of data e.g. based on date. 
 This helps reduce cost when querying. Cost is upfront. One column. 
 2. Clustering:  more filtered table with grouping into clusters. Cost is unknown. Multiple columns. \
-• We should choose Clustering over Partitioning when:
+• We should choose Clustering over Partitioning when: \
 ••• Partitioning results in very small amount of granualities, which might exceed the limits on partition tables (4000) \
 ••• Partitioning results in mutation operations too frequently e.g. inserting data into partition tables every few minutes.
