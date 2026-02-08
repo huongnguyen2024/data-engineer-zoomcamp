@@ -6,7 +6,7 @@
 • Data warehouse could be the storage bucket to store raw files in csv, parquet, json \
 • BigQuery is a dataset that contains structured tables, schemas \
 • A bucket and a dataset are not contained in each other; they are independent. They are combined to become a flow of data. \
-&nbsp; A bucket and a dataset should be in the same region to reduce cost, job speed. \
+&nbsp;  A bucket and a dataset should be in the same region to reduce cost, job speed. \
 • There are three options for their interaction with each other:
 1. Data warehouse (Bucket) can be a source -> Load data into -> BigQuery 
 2. External table: BigQuery reads/queries data directly from a Bucket source  
