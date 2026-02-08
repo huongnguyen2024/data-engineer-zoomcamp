@@ -17,5 +17,6 @@
 This helps reduce cost when querying. Cost is upfront. One column. 
 2. Clustering:  more filtered table with grouping into clusters. Cost is unknown. Multiple columns. \
 • We should choose Clustering over Partitioning when: \
-••• Partitioning results in very small amount of granualities, which might exceed the limits on partition tables (4000) \
-••• Partitioning results in mutation operations too frequently e.g. inserting data into partition tables every few minutes.
+\\ ••• Partitioning results in very small amount of granualities, which might exceed the limits on partition tables (4000) \
+\\ ••• Partitioning results in mutation operations too frequently e.g. inserting data into partition tables every few minutes. \
+• Automatic re-clustering is done in the background by BigQuery. The automatic re-clustering helps maintain the sort property of the table when a new data is inserted to the a clustered table, as this inserting causes key ranges overlapping, therefore it weakens the sort property of the table. 
