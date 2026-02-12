@@ -28,7 +28,7 @@ This helps reduce cost when querying. Cost is upfront. One column.
 Jupiter network 1TB per second speed \ 
 Divides the data into smaller chunks then propagates them into the leaf nodes. 
 
-#### HW 3: Data Warehousing
+## HW 3: Data Warehousing
 #### Question 1
 
 
