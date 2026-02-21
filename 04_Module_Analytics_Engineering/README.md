@@ -3,20 +3,24 @@
 - A place for SQL files that you don't want to exposr to the business customers
 - Use for data quality reports
 
-#### dbt_project.yml
-- The most important file in dbt 
-- Connection to be created between profiles.yml and a specific project
-
 #### macros
 - Bahave like Python functions (reusable logic)
 - New changes: e.g tax rates variables
 - Encapsulate logic in one place
 - Can be tested
 
-#### README.md
-- Documentation of the project
-- Installation/setup guides
-- Contact information
+#### models
+dbt suggests 3 subfolders:
+1. staging
+    - Sources (raw table from database)
+    - Staging files are 1 to 1 copy of your data with minimal cleaning step such as:
+        - Data types
+        - Rename columns
+2. intermediate
+    - Everything that is not raw and not ready to expose to end users
+3. marts
+    - Where all the final, consumption-ready tables live
+    - If it's in marts, it's ready for end users
 
 #### seeds
 - A space to upload csv and flat files to add them to dbt later
@@ -31,18 +35,14 @@
 - A place for singular tests
 - If this SQL command returns more than 0 rows, the dbt build fails
 
-#### models
-dbt suggests 3 subfolders:
-1. staging
-    - Sources (raw table from database)
-    - Staging files are 1 to 1 copy of your data with minimal cleaning step such as:
-        - Data types
-        - Rename columns
-2. intermediate
-    - Everything that is not raw and not ready to expose to end users
-3. marts
-    - Where all the final, consumption-ready tables live
-    - If it's in marts, it's ready for end users
+#### dbt_project.yml
+- The most important file in dbt 
+- Connection to be created between profiles.yml and a specific project
+
+#### README.md
+- Documentation of the project
+- Installation/setup guides
+- Contact information
 
     ## Homework 4: Analytics Engineering
  Q1. Given a dbt project with the following structure: 
