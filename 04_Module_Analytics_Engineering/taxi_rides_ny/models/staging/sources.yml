@@ -9,3 +9,5 @@ sources:
       - name: yellow_tripdata
            
       - name: green_tripdata
+
+      - name: fhv_tripdata
