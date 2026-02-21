@@ -76,7 +76,7 @@ Q3. Count of records in fct_monthly_zone_revenue?
     FROM taxi_rides_ny.dev.fct_monthly_zone_revenue;
  ```
     Answer: 12,184 records 
-Q4. Zone with highest revenue for Green taxis in 2020? \
+Q4. Zone with highest revenue for Green taxis in 2020? 
 ```sql
     SELECT 
    pickup_zone,
@@ -98,13 +98,15 @@ Q5.  Total trips for Green taxis in October 2019?
     AND revenue_month = DATE ('2019-10-01');
 ```
     Answer: 384,624 trips 
-Q6. Create a staging model for the For-Hire Vehicle (FHV) trip data for 2019. \
-        Load the FHV trip data for 2019 into your data warehouse \
-        Create a staging model stg_fhv_tripdata with these requirements: \
-        Filter out records where dispatching_base_num IS NULL \
-        Rename fields to match your project's naming conventions (e.g., PUlocationID → pickup_location_id) \ 
-        What is the count of records in stg_fhv_tripdata?  
-```sql
+Q6. Create a staging model for the For-Hire Vehicle (FHV) trip data for 2019. 
+```     
+    Load the FHV trip data for 2019 into your data warehouse 
+    Create a staging model stg_fhv_tripdata with these requirements: 
+    Filter out records where dispatching_base_num IS NULL 
+    Rename fields to match your project's naming conventions (e.g., PUlocationID → pickup_location_id)  
+    What is the count of records in stg_fhv_tripdata?  
+```
+```sql 
     SELECT COUNT(*)
     FROM taxi_rides_ny.dev.stg_fhv_tripdata;
 ```
