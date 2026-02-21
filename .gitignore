@@ -222,3 +222,12 @@ target/
 dbt_packages/
 logs/
 # end dbt Cloud content
+
+# Ignore all csv files in the seeds folder, but keep the folder itself
+seeds/*.csv
+
+# dbt local artifacts
+target/
+dbt_packages/
+logs/
+*.duckdb
