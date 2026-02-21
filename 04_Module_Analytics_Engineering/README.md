@@ -58,7 +58,7 @@ dbt suggests 3 subfolders:
     Answer: int_trips_unioned  
     Because the use of flag select, we will specifically run the model int_trips_unioned only but not the entire model folder. 
 
-Q2. You've configured a generic test like this in your schema.yml: 
+Q2. You've configured a generic test like this in your schema.yml. Your model fct_trips has been running successfully for months. A new value 6 now appears in the source data. What happens when you run dbt test --select fct_trips? 
 ```yaml
     columns:
   - name: payment_type
@@ -68,10 +68,9 @@ Q2. You've configured a generic test like this in your schema.yml:
             values: [1, 2, 3, 4, 5]
             quote: false
 ```
-    Your model fct_trips has been running successfully for months. A new value 6 now appears in the source data. What happens when you run dbt test --select fct_trips? \
     Answer: dbt fails the test with non-zero exit code  
-    Because the test is not updated to accept the value 6 --> error is detected --> the test fails --> the exit code is non-zero (unsuccessful) \
-Q3. Count of records in fct_monthly_zone_revenue? \
+    Because the test is not updated to accept the value 6 --> error is detected --> the test fails --> the exit code is non-zero (unsuccessful) 
+Q3. Count of records in fct_monthly_zone_revenue? 
 ```sql
     SELECT COUNT(*)
     FROM taxi_rides_ny.dev.fct_monthly_zone_revenue;
@@ -99,3 +98,15 @@ Q5.  Total trips for Green taxis in October 2019?
     AND revenue_month = DATE ('2019-10-01');
 ```
     Answer: 384,624 trips 
+Q6. Create a staging model for the For-Hire Vehicle (FHV) trip data for 2019. \
+        Load the FHV trip data for 2019 into your data warehouse \
+        Create a staging model stg_fhv_tripdata with these requirements: \
+        Filter out records where dispatching_base_num IS NULL \
+        Rename fields to match your project's naming conventions (e.g., PUlocationID → pickup_location_id) \ 
+        What is the count of records in stg_fhv_tripdata? \ 
+```sql
+    SELECT COUNT(*)
+    FROM taxi_rides_ny.dev.stg_fhv_tripdata;
+```
+    Answer: 43,244,693 
+
