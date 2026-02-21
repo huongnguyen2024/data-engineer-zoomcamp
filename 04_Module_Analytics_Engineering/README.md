@@ -45,17 +45,20 @@ dbt suggests 3 subfolders:
     - If it's in marts, it's ready for end users
 
     ## Homework 4: Analytics Engineering
- Q1. Given a dbt project with the following structure: \ 
-    models \
-    ├── staging \
-    │   ├── stg_green_tripdata.sql \
-    │   └── stg_yellow_tripdata.sql \
-    └── intermediate \ 
-        └── int_trips_unioned.sql (depends on stg_green_tripdata & stg_yellow_tripdata) \
-        If you run dbt run --select int_trips_unioned, what models will be built? \
-    Answer: int_trips_unioned \ 
-    Because the use of flag select, we will specifically run the model int_trips_unioned only but not the entire model folder. \
-Q2. You've configured a generic test like this in your schema.yml: \
+ Q1. Given a dbt project with the following structure: 
+```  
+    models 
+    ├── staging 
+    │   ├── stg_green_tripdata.sql 
+    │   └── stg_yellow_tripdata.sql 
+    └── intermediate 
+        └── int_trips_unioned.sql (depends on stg_green_tripdata & stg_yellow_tripdata) 
+        If you run dbt run --select int_trips_unioned, what models will be built?     
+```
+    Answer: int_trips_unioned  
+    Because the use of flag select, we will specifically run the model int_trips_unioned only but not the entire model folder. 
+
+Q2. You've configured a generic test like this in your schema.yml: 
 ```yaml
     columns:
   - name: payment_type
@@ -66,14 +69,14 @@ Q2. You've configured a generic test like this in your schema.yml: \
             quote: false
 ```
     Your model fct_trips has been running successfully for months. A new value 6 now appears in the source data. What happens when you run dbt test --select fct_trips? \
-    Answer: dbt fails the test with non-zero exit code \ 
+    Answer: dbt fails the test with non-zero exit code  
     Because the test is not updated to accept the value 6 --> error is detected --> the test fails --> the exit code is non-zero (unsuccessful) \
 Q3. Count of records in fct_monthly_zone_revenue? \
 ```sql
     SELECT COUNT(*)
     FROM taxi_rides_ny.dev.fct_monthly_zone_revenue;
  ```
-    Answer: 12,184 records \
+    Answer: 12,184 records 
 Q4. Zone with highest revenue for Green taxis in 2020? \
 ```sql
     SELECT 
@@ -87,12 +90,12 @@ Q4. Zone with highest revenue for Green taxis in 2020? \
     ORDER BY total_revenue_2020 DESC
     LIMIT 1;
 ```
-    Answer: East Harlem North \
-Q5.  Total trips for Green taxis in October 2019? \ 
+    Answer: East Harlem North 
+Q5.  Total trips for Green taxis in October 2019? 
 ```sql
     SELECT SUM(total_monthly_trips)
     FROM taxi_rides_ny.dev.fct_monthly_zone_revenue
     WHERE service_type = 'Green' 
     AND revenue_month = DATE ('2019-10-01');
 ```
-    Answer: 384,624 trips \
+    Answer: 384,624 trips 
