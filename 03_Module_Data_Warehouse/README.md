@@ -1,8 +1,8 @@
 ## Module 3: Data Warehouse and BigQuery
 
 #### Definitions of Data Warehouse and BigQuery
-• OLTP (Online Transaction Processing) runs in the backend, real-time, for small and updated data tasks. \
-• OLAP (Online Analytics Processing) runs as needed for analytics and data science purposes, for large data tasks with comparison.  \
+• OLTP (Online Transaction Processing) is optimized for transactional workloads, supporting applications with frequent inserts and updates. \
+• OLAP (Online Analytics Processing) is optimized for heavy analytical workloads, designed to run complex queries on large historical datasets, for reporting and business intelligence. \
 • Data warehouse could be the storage bucket to store raw files in csv, parquet, json \
 • BigQuery works with a dataset that contains structured tables, schemas \
 • A bucket (data warehouse) and a dataset are not contained in each other; they are independent. They are combined to become a flow of data. \
